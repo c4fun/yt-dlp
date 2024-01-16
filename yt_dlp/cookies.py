@@ -187,7 +187,10 @@ def _firefox_browser_dir():
         return os.path.expandvars(R'%APPDATA%\Mozilla\Firefox\Profiles')
     elif sys.platform == 'darwin':
         return os.path.expanduser('~/Library/Application Support/Firefox/Profiles')
-    return os.path.expanduser('~/.mozilla/firefox')
+    if os.path.exists(os.path.expanduser('~/snap/firefox/common/.mozilla/firefox')):
+        return os.path.expanduser('~/snap/firefox/common/.mozilla/firefox')
+    else:
+        return os.path.expanduser('~/.mozilla/firefox')
 
 
 def _get_chromium_based_browser_settings(browser_name):
